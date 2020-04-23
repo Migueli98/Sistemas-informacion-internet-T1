@@ -13,6 +13,13 @@ import javax.persistence.*;
 
 public class Usuario implements Serializable {
 
+	public enum Rol {
+      ADMIN,
+      ALUMNO,
+      PASPDI,
+      ONG
+    };
+    
 	@Id @GeneratedValue
 	private Long id;
 	@Column(nullable = false)
@@ -21,6 +28,8 @@ public class Usuario implements Serializable {
 	private String email;
 	private String Nombre;
 	private String Apellido;
+	@Enumerated(EnumType.STRING)
+	private Rol rol;
 	private static final long serialVersionUID = 1L;
 
 	public Usuario() {
@@ -60,6 +69,12 @@ public class Usuario implements Serializable {
 
 	public void setApellido(String Apellido) {
 		this.Apellido = Apellido;
+	}
+	public Rol getRol() {
+		return rol;
+	}
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
    
 }

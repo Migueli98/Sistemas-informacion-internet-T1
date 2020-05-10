@@ -20,6 +20,9 @@ public class Profesor extends Usuario {
 	@ManyToMany
 	private List<Asignaturas> imparte;
 	
+	@OneToMany(mappedBy = "profe")
+	private List<InformeActividad> inf;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Profesor() {
@@ -38,5 +41,12 @@ public class Profesor extends Usuario {
 	public void setImparte(List<Asignaturas> imparte) {
 		this.imparte = imparte;
 	}
+	public List<InformeActividad> getInf() {
+		return inf;
+	}
+	public void setInf(List<InformeActividad> inf) {
+		this.inf = inf;
+	}
+	
    
 }

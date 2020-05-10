@@ -3,6 +3,8 @@ package es.uma.informatica.sii;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -11,7 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 
-public class Informe_Para_Alumnos implements Serializable {
+public class InformeActividad implements Serializable {
 
 	@Id @GeneratedValue
 	private Long idInforme;
@@ -35,7 +37,7 @@ public class Informe_Para_Alumnos implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	public Informe_Para_Alumnos() {
+	public InformeActividad() {
 		super();
 	}   
 	public Long getIdInforme() {
@@ -66,6 +68,7 @@ public class Informe_Para_Alumnos implements Serializable {
 	public void setValoracionAlumno(String valoracionAlumno) {
 		this.valoracionAlumno = valoracionAlumno;
 	}
+	
 	public Profesor getProfe() {
 		return profe;
 	}
@@ -83,6 +86,29 @@ public class Informe_Para_Alumnos implements Serializable {
 	}
 	public void setServ(Servicios serv) {
 		this.serv = serv;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idInforme == null) ? 0 : idInforme.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InformeActividad other = (InformeActividad) obj;
+		if (idInforme == null) {
+			if (other.idInforme != null)
+				return false;
+		} else if (!idInforme.equals(other.idInforme))
+			return false;
+		return true;
 	}
    
 }

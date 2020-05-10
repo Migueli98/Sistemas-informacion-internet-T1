@@ -39,5 +39,29 @@ public class Centro implements Serializable {
 	public void setNombreCentro(String nombreCentro) {
 		this.nombreCentro = nombreCentro;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigoCentro == null) ? 0 : codigoCentro.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Centro other = (Centro) obj;
+		if (codigoCentro == null) {
+			if (other.codigoCentro != null)
+				return false;
+		} else if (!codigoCentro.equals(other.codigoCentro))
+			return false;
+		return true;
+	}
+	
    
 }

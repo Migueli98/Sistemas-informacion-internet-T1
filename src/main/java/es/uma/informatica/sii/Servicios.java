@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -30,6 +32,12 @@ public class Servicios implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "ONG")
 	private Ong ong;
+	
+	@OneToMany(mappedBy = "servicio")
+	private List<Actividades> act;
+	
+	@OneToMany(mappedBy = "servicio")
+	private List<Requisitos> req;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -91,5 +99,42 @@ public class Servicios implements Serializable {
 	public void setOng(Ong ong) {
 		this.ong = ong;
 	}
+	
+	public List<Actividades> getAct() {
+		return act;
+	}
+	public void setAct(List<Actividades> act) {
+		this.act = act;
+	}
+	public List<Requisitos> getReq() {
+		return req;
+	}
+	public void setReq(List<Requisitos> req) {
+		this.req = req;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigoServicio == null) ? 0 : codigoServicio.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Servicios other = (Servicios) obj;
+		if (codigoServicio == null) {
+			if (other.codigoServicio != null)
+				return false;
+		} else if (!codigoServicio.equals(other.codigoServicio))
+			return false;
+		return true;
+	}
+	
    
 }

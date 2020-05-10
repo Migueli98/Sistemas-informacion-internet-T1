@@ -97,5 +97,29 @@ public class Asignaturas implements Serializable {
 	public void setCompuestoDe(List<Requisitos> compuestoDe) {
 		this.compuestoDe = compuestoDe;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigoAsignatura == null) ? 0 : codigoAsignatura.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Asignaturas other = (Asignaturas) obj;
+		if (codigoAsignatura == null) {
+			if (other.codigoAsignatura != null)
+				return false;
+		} else if (!codigoAsignatura.equals(other.codigoAsignatura))
+			return false;
+		return true;
+	}
+	
    
 }

@@ -13,6 +13,7 @@
 		<class>es.uma.informatica.sii.Actividades</class>
 		<class>es.uma.informatica.sii.Requisitos</class>
 		<class>es.uma.informatica.sii.Informe_Alumnos</class>
+		<class>es.uma.informatica.sii.Inscripciones</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sii"/>
 			<property name="javax.persistence.jdbc.user" value="siiuser"/>

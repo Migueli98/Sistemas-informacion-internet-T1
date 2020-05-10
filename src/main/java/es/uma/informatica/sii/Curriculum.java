@@ -15,15 +15,43 @@ import javax.persistence.*;
 
 public class Curriculum implements Serializable {
 
+	public enum diasSemana {
+		LUNES,
+		MARTES,
+		MIERCOLES,
+		JUEVES,
+		VIERNES,
+		SABADO,
+		DOMINGO
+	};
+	
+	public enum idioma {
+		INGLES,
+		ALEMAN,
+		ARABE,
+		FRANCES,
+		ITALIANO,
+		CHINO,
+		JAPONES,
+		KOREANO,
+		ESPAÑOL,
+		TURCO,
+		RUSO,
+		POLACO,
+		NORUEGO
+	};
+	 
 	@Id @GeneratedValue
-	private Long id;
+	@OneToOne(mappedBy = "cv")
+	private Alumno alumno;
 	@Column(nullable = false)
-	private String idiomas;
+	@Enumerated(EnumType.STRING)
+	private List<idioma> idiomas;
 	@Column(nullable = false)
 	private String experienciaLaboral;
 	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date disponibilidadHoraria;
+	@Enumerated(EnumType.STRING)
+	private List<diasSemana> disponibilidadHoraria;
 	private static final long serialVersionUID = 1L;
 
 	@ManyToMany
@@ -32,34 +60,31 @@ public class Curriculum implements Serializable {
 	public Curriculum() {
 		super();
 	}   
-	
-	public Long getId() {
-		return id;
+	public Alumno getAlumno() {
+		return alumno;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
 	}
-
-	public String getIdiomas() {
-		return this.idiomas;
-	}
-
-	public void setIdiomas(String idiomas) {
-		this.idiomas = idiomas;
-	}   
 	public String getExperienciaLaboral() {
 		return this.experienciaLaboral;
 	}
-
 	public void setExperienciaLaboral(String experienciaLaboral) {
 		this.experienciaLaboral = experienciaLaboral;
 	}   
-	public Date getDisponibilidadHoraria() {
-		return this.disponibilidadHoraria;
+	public List<idioma> getIdiomas() {
+		return idiomas;
 	}
 
-	public void setDisponibilidadHoraria(Date disponibilidadHoraria) {
+	public void setIdiomas(List<idioma> idiomas) {
+		this.idiomas = idiomas;
+	}
+
+	public List<diasSemana> getDisponibilidadHoraria() {
+		return disponibilidadHoraria;
+	}
+
+	public void setDisponibilidadHoraria(List<diasSemana> disponibilidadHoraria) {
 		this.disponibilidadHoraria = disponibilidadHoraria;
 	}
 
@@ -70,5 +95,47 @@ public class Curriculum implements Serializable {
 	public void setCompuestoDe(List<Asignaturas> compuestoDe) {
 		this.compuestoDe = compuestoDe;
 	}
-   
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((alumno == null) ? 0 : alumno.hashCode());
+		result = prime * result + ((disponibilidadHoraria == null) ? 0 : disponibilidadHoraria.hashCode());
+		result = prime * result + ((experienciaLaboral == null) ? 0 : experienciaLaboral.hashCode());
+		result = prime * result + ((idiomas == null) ? 0 : idiomas.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Curriculum other = (Curriculum) obj;
+		if (alumno == null) {
+			if (other.alumno != null)
+				return false;
+		} else if (!alumno.equals(other.alumno))
+			return false;
+		if (disponibilidadHoraria == null) {
+			if (other.disponibilidadHoraria != null)
+				return false;
+		} else if (!disponibilidadHoraria.equals(other.disponibilidadHoraria))
+			return false;
+		if (experienciaLaboral == null) {
+			if (other.experienciaLaboral != null)
+				return false;
+		} else if (!experienciaLaboral.equals(other.experienciaLaboral))
+			return false;
+		if (idiomas == null) {
+			if (other.idiomas != null)
+				return false;
+		} else if (!idiomas.equals(other.idiomas))
+			return false;
+		return true;
+	}
+	
+	
 }

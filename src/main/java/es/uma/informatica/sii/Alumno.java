@@ -25,6 +25,9 @@ public class Alumno extends Usuario{
 	@ManyToMany
 	private List<Asignaturas> matriculadoEn;
 	
+	@OneToMany(mappedBy = "alumn")
+	private List<InformeActividad> inf;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Alumno() {
@@ -56,5 +59,12 @@ public class Alumno extends Usuario{
 	public void setMatriculadoEn(List<Asignaturas> matriculadoEn) {
 		this.matriculadoEn = matriculadoEn;
 	}
+	public List<InformeActividad> getInf() {
+		return inf;
+	}
+	public void setInf(List<InformeActividad> inf) {
+		this.inf = inf;
+	}
+	
    
 }

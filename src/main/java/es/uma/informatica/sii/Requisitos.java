@@ -16,7 +16,9 @@ import javax.persistence.*;
 public class Requisitos implements Serializable {
 
 	@Id @GeneratedValue
-	private Long id;
+	@ManyToOne
+	@JoinColumn(name = "servicio")
+	private Servicios servicio;
 	@Column(nullable = false)
 	private String idiomas;
 	@Column(nullable = false)
@@ -25,10 +27,6 @@ public class Requisitos implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date disponibilidadHoraria;
 	private static final long serialVersionUID = 1L;
-	
-	@ManyToOne
-	@JoinColumn(name = "servicio")
-	private Servicios servicio;
 	
 	@ManyToMany
 	private List<Asignaturas> requieren;
@@ -69,11 +67,30 @@ public class Requisitos implements Serializable {
 	public void setRequieren(List<Asignaturas> requieren) {
 		this.requieren = requieren;
 	}
-	public Long getId() {
-		return id;
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((servicio == null) ? 0 : servicio.hashCode());
+		return result;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Requisitos other = (Requisitos) obj;
+		if (servicio == null) {
+			if (other.servicio != null)
+				return false;
+		} else if (!servicio.equals(other.servicio))
+			return false;
+		return true;
 	}
+	
    
 }

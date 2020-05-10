@@ -2,6 +2,8 @@ package es.uma.informatica.sii;
 
 import es.uma.informatica.sii.Usuario;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -22,6 +24,8 @@ public class Ong extends Usuario {
 	@Column(nullable = false)
 	private String pais;
 	private String paginaWeb;
+	@OneToMany(mappedBy = "ong")
+	private List<Servicios> serv;
 	private static final long serialVersionUID = 1L;
 
 	public Ong() {
@@ -68,6 +72,12 @@ public class Ong extends Usuario {
 
 	public void setPaginaWeb(String paginaWeb) {
 		this.paginaWeb = paginaWeb;
+	}
+	public List<Servicios> getServ() {
+		return serv;
+	}
+	public void setServ(List<Servicios> serv) {
+		this.serv = serv;
 	}
    
 }
